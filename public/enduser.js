@@ -148,16 +148,14 @@ $(document).ready(function(){
         if($(this).val() == '') reset()
        
         var jasa_id = $(this).val();
-        console.log(jasa_id)
         if(jasa_id){
             $.ajax({
                type:"GET",
-               url:"/getnamajasa?jasa_id="+jasa_id,
+               url:"/getnamajasauser?jasa_id="+jasa_id,
                dataType: 'JSON',
                success:function(res){               
                 if(res){
                     $('[name="sub_harga"]').val(0)
-                    $('[name="sub_harga"]').prop('readonly', false)
                     $('[name="jumlah_jasa"]').val(0)
                     $('[name="jumlah_jasa"]').prop('readonly', false)
                     $('button#Add').prop('disabled', false)
@@ -176,6 +174,16 @@ $(document).ready(function(){
             $('[name="harga_jasa"]').empty();
         }      
        });
+
+       $(document).ready(function(){
+        $("#jumlah_jasa").on('keyup mouseup',function () {
+         var jumlah_jasa = $(this).val();
+         var harga_jasa =  document.getElementById("harga_jasa").value;
+         var sub_harga = harga_jasa * jumlah_jasa;
+         $('[name="sub_harga"]').val(sub_harga);
+     
+         });
+        });
     
 });
 

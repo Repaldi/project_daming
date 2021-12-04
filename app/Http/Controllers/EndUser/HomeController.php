@@ -8,6 +8,7 @@ use App\Provinsi;
 use App\Kabupaten;
 use App\Kecamatan;
 use App\TipeBangunan;
+use App\Jasa;
 use App\Kalkulasi;
 use App\KalkulasiDetail;
 use DB;
@@ -62,11 +63,7 @@ class HomeController extends Controller
     }
 
     public function getJasa(Request $request){
-       $data_jasa = DB::table('jasa')->where([
-                                            ['provinsi_id',  '=', $request->provinsi_id],
-                                            ['kabupaten_id', '=', $request->kabupaten_id],
-                                            ['kecamatan_id', '=', $request->kecamatan_id],
-                                        ])->pluck('nama_jasa','harga_jasa');;
+       $data_jasa = Jasa::where("id",$request->jasa_id)->pluck('nama_jasa','harga_jasa');
                                    
         return response()->json($data_jasa);
     }

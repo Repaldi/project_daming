@@ -30,7 +30,7 @@ Route::get('/getkecamatanuser', 'EndUser\HomeController@getKecamatan');
 Route::get('/gettipebangunanuser', 'EndUser\HomeController@getTipeBangunan');
 Route::get('/search-data-kalkulasi', 'EndUser\HomeController@searchDataKalkulasi');
 Route::get('/search-data-nama-jasa', 'EndUser\HomeController@searchJasaId');
-Route::get('/getnamajasa', 'EndUser\HomeController@getJasa');
+Route::get('/getnamajasauser', 'EndUser\HomeController@getJasa');
 
 
 
