@@ -9,6 +9,8 @@ use App\Jasa;
 use App\TipeBangunan;
 use App\Kalkulasi;
 use App\KalkulasiDetail;
+use App\EstimasiWaktu;
+use App\EstimasiWaktuDetail;
 use App\Provinsi;
 use App\Kabupaten;
 use App\Kecamatan;
@@ -49,7 +51,16 @@ class HomeController extends Controller
         return response()->json($nama_material);
     }
 
-   
+    public function getJasa(Request $request){
+        $data_jasa_id =Jasa::where("kecamatan_id", $request->kecamatan_id)->pluck('id','nama_jasa');   
+         return response()->json($data_jasa_id);
+     }
+
+     public function getDataJasa(Request $request){
+        $data_jasa = Jasa::where("id",$request->jasa_id)->pluck('nama_jasa','harga_jasa');
+                                    
+         return response()->json($data_jasa);
+     }
 
     public function addKalkulasi(Request $request){
 
@@ -76,13 +87,42 @@ class HomeController extends Controller
 
     }
 
+    public function addEstimasiWaktu(Request $request){
+
+ 
+        $estimasi_waktu = new EstimasiWaktu;
+        $estimasi_waktu->provinsi_id = $request->provinsi_id_hidden;
+        $estimasi_waktu->kabupaten_id = $request->kabupaten_id_hidden;
+        $estimasi_waktu->kecamatan_id = $request->kecamatan_id_hidden;
+        $estimasi_waktu->total_jasa = $request->total_jasa_hidden;
+        $estimasi_waktu->total_harga_jasa = $request->total_hidden;
+        $estimasi_waktu->waktu_pengerjaan = $request->waktu_pengerjaan_hidden;
+        $estimasi_waktu->save();  
+        $jasa_id = $_POST['jasa_id_hidden'];
+        foreach ($jasa_id as $key => $jasa) {
+            $data['estimasi_waktu_id'] = $estimasi_waktu->id;
+            $data['jasa_id'] = $jasa;
+            $data['harga_jasa'] = $request->harga_jasa_hidden[$key];
+            $data['jumlah_jasa'] = $request->jumlah_jasa_hidden[$key];
+            $data['sub_harga_jasa'] = $request->sub_harga_hidden[$key];
+            EstimasiWaktuDetail::create($data);
+        }
+        return redirect()->route('listEstimasiWaktu');
+    
+        }
+
     public function material()
     {
         
-        $material = Material::all();
-        $provinsi = Provinsi::all();
+        $material = Material::paginate(5);
 
-        return view('dashboard.material',compact(['material','provinsi']));
+        return view('dashboard.list-material',compact(['material']));
+    }
+
+    public function formMaterial()
+    {       
+        $provinsi = Provinsi::all();
+        return view('dashboard.tambah-material',compact(['provinsi']));
     }
    
     
@@ -99,11 +139,27 @@ class HomeController extends Controller
               'kecamatan_id' => $request->kecamatan_id,       
             ]);  
           
-            return redirect()->back()->with('success-add-material','Text'); 
+            return redirect()->route('material')->with('success-add-material','Text'); 
           } catch (\Exception $e) {
             return redirect()->back()->with('error-add-material','Text'); 
           }
     }
+    
+    public function editMaterial($id)
+    {  
+        $material = Material::find($id);
+        $provinsi = Provinsi::all();
+        
+        return view('dashboard.edit-material',compact(['material','provinsi']));
+    }
+
+    public function updateMaterial(Request $request)
+    {  
+         $material = Material::findOrFail($request->id);
+         $material->update($request->all());
+         return redirect()->route('material');
+    }
+    
 
     public function deleteMaterial($id){
         Material::find($id)->delete();
@@ -111,12 +167,15 @@ class HomeController extends Controller
     }
 
     public function jasa()
-    {
-        
-        $jasa = Jasa::all();
-        $provinsi = Provinsi::all();
+    {    
+        $jasa = Jasa::paginate(5);
+        return view('dashboard.list-jasa',compact(['jasa']));
+    }
 
-        return view('dashboard.jasa',compact(['jasa','provinsi']));
+    public function formJasa()
+    {      
+        $provinsi = Provinsi::all();
+        return view('dashboard.tambah-jasa',compact(['provinsi']));
     }
    
 
@@ -132,10 +191,25 @@ class HomeController extends Controller
               'kecamatan_id' => $request->kecamatan_id,       
             ]);  
           
-            return redirect()->back()->with('success-add-jasa','Text'); 
+            return redirect()->route('jasa')->with('success-add-jasa','Text'); 
           } catch (\Exception $e) {
             return redirect()->back()->with('error-add-jasa','Text'); 
           }
+    }
+
+    public function editJasa($id)
+    {  
+        $jasa = Jasa::find($id);
+        $provinsi = Provinsi::all();
+        
+        return view('dashboard.edit-jasa',compact(['jasa','provinsi']));
+    }
+
+    public function updateJasa(Request $request)
+    {  
+         $jasa = Jasa::findOrFail($request->id);
+         $jasa->update($request->all());
+         return redirect()->route('jasa');
     }
     
     public function deleteJasa($id){
@@ -147,10 +221,15 @@ class HomeController extends Controller
     public function tipeBangunan()
     {
         
-        $tipeBangunan = TipeBangunan::all();
-        $provinsi = Provinsi::all();
+        $tipeBangunan = TipeBangunan::paginate(5);
 
-        return view('dashboard.tipe-bangunan',compact(['tipeBangunan','provinsi']));
+        return view('dashboard.list-tipe-bangunan',compact(['tipeBangunan']));
+    }
+
+    public function formTipeBangunan()
+    {       
+        $provinsi = Provinsi::all();
+        return view('dashboard.tambah-tipe-bangunan',compact(['provinsi']));
     }
    
 
@@ -165,11 +244,28 @@ class HomeController extends Controller
               'kecamatan_id' => $request->kecamatan_id,       
             ]);  
           
-            return redirect()->back()->with('success-add-tipe-bangunan','Text'); 
+            return redirect()->route('tipeBangunan')->with('success-add-tipe-bangunan','Text'); 
           } catch (\Exception $e) {
             return redirect()->back()->with('error-add-tipe-bangunan','Text'); 
           }
     }
+
+    public function editTipeBangunan($id)
+    {  
+        $tipe_bangunan= TipeBangunan::find($id);
+        $provinsi = Provinsi::all();
+        
+        return view('dashboard.edit-tipe-bangunan',compact(['tipe_bangunan','provinsi']));
+    }
+
+    public function updateTipeBangunan(Request $request)
+    {  
+         $tipe_bangunan = TipeBangunan::findOrFail($request->id);
+         $tipe_bangunan->update($request->all());
+         return redirect()->route('tipeBangunan');
+    }
+    
+
 
     public function deleteTipeBangunan($id){
         TipeBangunan::find($id)->delete();
@@ -179,7 +275,7 @@ class HomeController extends Controller
 
     public function listKalkulasi()
     {
-        $kalkulasi = Kalkulasi::all();
+        $kalkulasi = Kalkulasi::paginate(5);
         
         return view('dashboard.list-kalkulasi',compact(['kalkulasi']));
     }
@@ -206,7 +302,32 @@ class HomeController extends Controller
         return redirect()->back()->with('success-delete-kalkulasi','Text');
     }
 
+    public function listEstimasiWaktu()
+    {
+        $estimasi_waktu = EstimasiWaktu::paginate(5);
+        
+        return view('dashboard.list-estimasi-waktu',compact(['estimasi_waktu']));
+    }
 
+    public function formEstimasiWaktu()
+    {
+        
+        $provinsi = Provinsi::all();
+        return view('dashboard.tambah-estimasi-waktu',compact(['provinsi']));
+    }
+
+    public function deleteEstimasiWaktu($id){
+        $estimasi_waktu = EstimasiWaktu::find($id);
+        $detail_estimasi_waktu = EstimasiWaktuDetail::where('estimasi_waktu_id', $estimasi_waktu->id)->delete();
+        $estimasi_waktu->delete();
+        return redirect()->back()->with('success-delete-estimasi-waktu','Text');
+    }
+
+    public function formDetailEstimasiWaktu($id){
+        $estimasi_waktu = EstimasiWaktu::find($id);
+        $detail_estimasi_waktu = EstimasiWaktuDetail::where('estimasi_waktu_id', $id)->get();
+        return view('dashboard.detail-estimasi-waktu', compact(['estimasi_waktu','detail_estimasi_waktu']));
+    }
     // public function tambahKalkulasi(Request $request)
     // {  
 

@@ -107,47 +107,43 @@
             <div class="card" id="formTambahan">        
                 <div class="card-body" >   
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-jasa">Pilih Jasa</label>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-estimasi_waktu"> Waktu Pengerjaan</label>
 
-                                <select class="form-control" name="jasa_id" id="jasa_id">
-                                    <option selected>Pilih Jasa </option>
-                                </select>
+                                    <select class="form-control" name="estimasi_waktu_id" id="estimasi_waktu_id">
+                                        <option selected>Pilih Waktu Pengerjaan </option>
+                                    </select>
 
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-harga-jasa">Harga</label>
-                                <input type="text"  class="form-control" name="harga_jasa" id="harga_jasa" readonly>    
-                                <input type="hidden"  class="form-control" name="nama_jasa" id="nama_jasa">
-                            </div>
-                        </div>
+                    </div>
+                    <div class="row keranjang">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered" id="keranjang">
+                            <thead>
+                                <tr>
+                                <td width="35%">Nama Jasa</td>
+                                <td width="15%">Harga</td>
+                                <td width="15%">Jumlah</td>
+                                <td width="10%">Sub Total</td>
+                                <td width="15%">Aksi</td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyid">
+                            </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                       <center> <button  type="button" class="btn  btn-block btn-primary" id="btnResetEstimasiWaktu"><i class="fa fa-undo"></i> Ganti Estimasi Waktu</button> </center>
+                                    </td>
+                                </tr>
 
-                        <div class="col-lg-2">
-                            <div class="form-group">
-
-                                <label class="form-control-label" for="input-jumlah">Jumlah</label>
-                                <input type="number" readonly class="form-control" name="jumlah_jasa"  id="jumlah_jasa" min='1' >
-            
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-sub-harga">Sub Harga</label>
-                                <input type="text"  class="form-control" name="sub_harga" id="sub_harga" readonly>    
-                            </div>
-                        </div>
-
-                        <div class="col-lg-1">
-                            <div class="form-group">
-                                <label for="">&nbsp;</label>
-                                <button disabled type="button" class="btn btn-primary btn-block" id="Add"><i class="fa fa-plus"></i></button>                      
-                            </div>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
+                </div>
 
                     <hr class="my-4" /> 
                    

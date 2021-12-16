@@ -78,6 +78,12 @@
                 <span class="nav-link-text">Kalkulasi Harga</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link {{(request()->is('list-estimasi-waktu')) ? 'active' : ''}}" href="{{route('listEstimasiWaktu')}}"  aria-controls="navbar-tables">
+                <i class="ni ni-align-left-2 text-default"></i>
+                <span class="nav-link-text">Estimasi Waktu</span>
+              </a>
+            </li>
 
           </ul>
           <!-- Divider -->

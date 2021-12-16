@@ -3,7 +3,7 @@ $('#provinsi').change(function(){
     if(provinsi_id){
         $.ajax({
            type:"GET",
-           url:"getkabupaten?provinsi_id="+provinsi_id,
+           url:"/getkabupaten?provinsi_id="+provinsi_id,
            dataType: 'JSON',
            success:function(res){               
             if(res){
@@ -31,7 +31,7 @@ $('#provinsi').change(function(){
     if(kabupaten_id){
         $.ajax({
            type:"GET",
-           url:"getkecamatan?kabupaten_id="+kabupaten_id,
+           url:"/getkecamatan?kabupaten_id="+kabupaten_id,
            dataType: 'JSON',
            success:function(res){               
             if(res){
