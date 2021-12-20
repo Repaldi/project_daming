@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-  <meta name="author" content="Creative Tim">
-  <title>TOKO PROYEK DOT COM</title>
+  <!-- <meta name="description" content=""> -->
+  <meta name="author" content="tokoproyek.com">
+  <title>Cost Calculator By Toko Proyek</title>
  <!-- Favicons -->
-  <link href="{{asset('Gambar/Logo/favicon.png')}}" rel="icon">
-  <link href="{{asset('Gambar/Logo/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+  <link href="{{asset('assets_dashboard/img/brand/tokpro.png')}}" rel="icon">
+  <!-- <link href="{{asset('Gambar/Logo/img/apple-touch-icon.png')}}" rel="apple-touch-icon"> -->
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
