@@ -128,21 +128,19 @@ class HomeController extends Controller
     
     public function tambahMaterial(Request $request)
     {  
-        try {
+
           
             $material = material::create([
               'nama_material' => $request->nama_material,
               'harga_material' => $request->harga_material,
               'satuan_material' => $request->satuan_material,
               'provinsi_id' => $request->provinsi_id,
-              'kabupaten_id' => $request->kabupaten_id,       
-              'kecamatan_id' => $request->kecamatan_id,       
+              'kabupaten_id' => $request->filled('kabupaten_id')? $request->kabupaten_id : Null,      
+              'kecamatan_id' => $request->filled('kecamatan_id')? $request->kecamatan_id : Null,       
             ]);  
           
             return redirect()->route('material')->with('success-add-material','Text'); 
-          } catch (\Exception $e) {
-            return redirect()->back()->with('error-add-material','Text'); 
-          }
+         
     }
     
     public function editMaterial($id)
@@ -181,20 +179,18 @@ class HomeController extends Controller
 
     public function tambahJasa(Request $request)
     {  
-        try {
-          
+       
+      
             $jasa = Jasa::create([
               'nama_jasa' => $request->nama_jasa,
               'harga_jasa' => $request->harga_jasa,
               'provinsi_id' => $request->provinsi_id,
-              'kabupaten_id' => $request->kabupaten_id,       
-              'kecamatan_id' => $request->kecamatan_id,       
+              'kabupaten_id' => $request->filled('kabupaten_id')? $request->kabupaten_id : Null,      
+              'kecamatan_id' => $request->filled('kecamatan_id')? $request->kecamatan_id : Null,          
             ]);  
           
             return redirect()->route('jasa')->with('success-add-jasa','Text'); 
-          } catch (\Exception $e) {
-            return redirect()->back()->with('error-add-jasa','Text'); 
-          }
+         
     }
 
     public function editJasa($id)
@@ -235,19 +231,17 @@ class HomeController extends Controller
 
     public function tambahTipeBangunan(Request $request)
     {  
-        try {
+      
           
             $tipeBangunan = TipeBangunan::create([
               'nama_tipe_bangunan' => $request->nama_tipe_bangunan,
               'provinsi_id' => $request->provinsi_id,
-              'kabupaten_id' => $request->kabupaten_id,       
-              'kecamatan_id' => $request->kecamatan_id,       
+              'kabupaten_id' => $request->filled('kabupaten_id')? $request->kabupaten_id : Null,      
+              'kecamatan_id' => $request->filled('kecamatan_id')? $request->kecamatan_id : Null,        
             ]);  
           
             return redirect()->route('tipeBangunan')->with('success-add-tipe-bangunan','Text'); 
-          } catch (\Exception $e) {
-            return redirect()->back()->with('error-add-tipe-bangunan','Text'); 
-          }
+        
     }
 
     public function editTipeBangunan($id)

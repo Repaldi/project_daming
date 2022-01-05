@@ -29,7 +29,7 @@
             <div class="card-header">
               <div class="row align-items-center">
                   <div class="col-10">
-                  <h3 class="mb-0">Tambah Data Kalkulasi </h3>
+                  <h3 class="mb-0">Tambah Data Jasa </h3>
                   </div>
                   <div class="col-2">
                   <a href="{{route('jasa')}}" type="button" class="btn btn-primary btn-block"><i class="fa fa-reply"></i> Kembali</a>  
@@ -69,14 +69,14 @@
                     <div class="col-lg-4">
                       <div class="form-group">
                         <select class="form-control" name="kabupaten_id" id="kabupaten">
-                          <option selected>---Pilih Kabupaten---</option>
+                          <option  selected>---Pilih Kabupaten---</option>
                         </select>  
                       </div>   
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <select class="form-control" name="kecamatan_id" id="kecamatan">
-                          <option selected>---Pilih Kecamatan---</option>
+                          <option  selected>---Pilih Kecamatan---</option>
                         </select> 
                       </div>    
                     </div>

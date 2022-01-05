@@ -63,11 +63,19 @@
                       {{$data_material->provinsi->nama_provinsi}}
                     </td>
                     <td>
+                    @if($data_material->kabupaten_id != Null)
                     {{$data_material->kabupaten->nama_kabupaten}}
-                    </td>
-                    <td>
+                    @else
+                    -
+                    @endif
+                  </td>
+                  <td>
+                  @if($data_material->kecamatan_id != Null)
                     {{$data_material->kecamatan->nama_kecamatan}}
-                    </td>
+                    @else
+                    -
+                    @endif
+                  </td>
                     <td class="table-actions">
 
                         <a href="{{route('editMaterial', $data_material->id)}}" type="button" class="table-action">

@@ -73,16 +73,28 @@
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
+                        @if($material->kabupaten_id != Null)
                         <select class="form-control" name="kabupaten_id" id="kabupaten" value="{{$material->kabupaten_id}}">
                           <option value="{{$material->kabupaten_id}}"selected>{{$material->kabupaten->nama_kabupaten}}</option>
                         </select>  
+                        @else
+                        <select class="form-control" name="kabupaten_id" id="kabupaten" >
+                          <option value="" selected>---Pilih Kabupaten---</option>
+                        </select> 
+                        @endif
                       </div>   
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
+                        @if($material->kecamatan_id != Null)
                         <select class="form-control" name="kecamatan_id" id="kecamatan" value="{{$material->kecamatan_id}}">
-                          <option value="{{$material->kecamatan_id}}" selected>{{$material->kecamatan->nama_kecamatan}}</option>
+                          <option value="{{$material->kecamatan_id}}"selected>{{$material->kecamatan->nama_kecamatan}}</option>
+                        </select>  
+                        @else
+                        <select class="form-control" name="kecamatan_id" id="kecamatan" >
+                          <option value="" selected>---Pilih Kecamatan---</option>
                         </select> 
+                        @endif
                       </div>    
                     </div>
                 </div> 

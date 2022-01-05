@@ -138,6 +138,12 @@
                                        <center> <button  type="button" class="btn  btn-block btn-primary" id="btnResetEstimasiWaktu"><i class="fa fa-undo"></i> Ganti Estimasi Waktu</button> </center>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        
+                                       <center> <a href="/download-rincian" target="_blank" class="btn  btn-block btn-primary" id="download-rincian"><i class="fa fa-download"></i> Download Rincian</a> </center>
+                                    </td>
+                                </tr>
 
                                 </tfoot>
                             </table>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\EndUser;
 
 use App\Http\Controllers\Controller;
+use PDF;
 use Illuminate\Http\Request;
 use App\Provinsi;
 use App\Kabupaten;
@@ -61,6 +62,39 @@ class HomeController extends Controller
                                                 ])->pluck('total_harga')->first();
                                    
         return response()->json($data_kalkulasi);
+    }
+
+    public function downloadRincian(Request $request){
+       $data_rincian_kalkulasi = DB::table('kalkulasi')->where([
+                                                    ['provinsi_id',  '=', $request->provinsi_id],
+                                                    ['kabupaten_id', '=', $request->kabupaten_id],
+                                                    ['kecamatan_id', '=', $request->kecamatan_id],
+                                                    ['tipe_bangunan_id', '=', $request->tipebangunan_id],
+                                                ])->first();
+        
+        
+        $detail_rincian_kalkulasi= KalkulasiDetail::join('kalkulasi',function ($join){
+        $join->on('kalkulasi_detail.kalkulasi_id','=', 'kalkulasi.id');
+        })->where('kalkulasi_detail.kalkulasi_id', $data_rincian_kalkulasi->id)->get();
+
+       $data_rincian_estimasi_waktu = DB::table('estimasi_waktu')->where([
+                                                    ['provinsi_id',  '=', $request->provinsi_id],
+                                                    ['kabupaten_id', '=', $request->kabupaten_id],
+                                                    ['kecamatan_id', '=', $request->kecamatan_id],
+                                                ])->first();
+        
+        $detail_rincian_estimasi_waktu= EstimasiWaktuDetail::join('estimasi_waktu',function ($join){
+        $join->on('estimasi_waktu_detail.estimasi_waktu_id','=', 'estimasi_waktu.id');
+        })->where('estimasi_waktu_detail.estimasi_waktu_id', $data_rincian_estimasi_waktu->id)->get();
+
+                                            
+        $pdf = PDF::loadview('data_rincian_pdf',['data_rincian_kalkulasi'=>$data_rincian_kalkulasi,
+                                                 'detail_rincian_kalkulasi'=>$detail_rincian_kalkulasi,
+                                                 'data_rincian_estimasi_waktu'=>$data_rincian_estimasi_waktu,
+                                                 'detail_rincian_estimasi_waktu'=>$detail_rincian_estimasi_waktu
+                                                ]);
+        return $pdf->download('data_rincian_pdf');
+  
     }
 
     public function searchJasaId(Request $request){

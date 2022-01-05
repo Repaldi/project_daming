@@ -32,6 +32,7 @@ Route::get('/search-data-kalkulasi', 'EndUser\HomeController@searchDataKalkulasi
 Route::get('/search-data-nama-jasa', 'EndUser\HomeController@searchJasaId');
 Route::get('/getnamajasauser', 'EndUser\HomeController@getJasa');
 
+Route::get('/download-rincian', 'EndUser\HomeController@downloadRincian');
 Route::get('/getestimasiwaktuuser', 'EndUser\HomeController@getEstimasiWaktu');
 Route::get('/search-data-waktu-pengerjaan', 'EndUser\HomeController@searchWaktuPengerjaan');
 

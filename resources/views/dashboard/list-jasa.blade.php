@@ -63,10 +63,18 @@
                     {{$data_jasa->provinsi->nama_provinsi}}
                   </td>
                   <td>
+                    @if($data_jasa->kabupaten_id != Null)
                     {{$data_jasa->kabupaten->nama_kabupaten}}
+                    @else
+                    -
+                    @endif
                   </td>
                   <td>
+                  @if($data_jasa->kecamatan_id != Null)
                     {{$data_jasa->kecamatan->nama_kecamatan}}
+                    @else
+                    -
+                    @endif
                   </td>
                   <td class="table-actions">
 

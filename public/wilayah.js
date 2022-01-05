@@ -9,8 +9,8 @@ $('#provinsi').change(function(){
             if(res){
                 $("#kabupaten").empty();
                 $("#kecamatan").empty();
-                $("#kabupaten").append('<option>---Pilih Kabupaten---</option>');
-                $("#kecamatan").append('<option>---Pilih Kecamatan---</option>');
+                $("#kabupaten").append('<option value="">---Pilih Kabupaten---</option>');
+                $("#kecamatan").append('<option value="">---Pilih Kecamatan---</option>');
                 $.each(res,function(nama_kabupaten, id){
                     $("#kabupaten").append('<option value="'+id+'">'+nama_kabupaten+'</option>');
                 });
@@ -36,7 +36,7 @@ $('#provinsi').change(function(){
            success:function(res){               
             if(res){
                 $("#kecamatan").empty();
-                $("#kecamatan").append('<option>---Pilih Kecamatan---</option>');
+                $("#kecamatan").append('<option  value="">---Pilih Kecamatan---</option>');
                 $.each(res,function(nama_kecamatan,id){
                     $("#kecamatan").append('<option value="'+id+'">'+nama_kecamatan+'</option>');
                 });

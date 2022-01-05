@@ -57,11 +57,19 @@
                   {{$data_tipe_bangunan->provinsi->nama_provinsi}}
                 </td>
                 <td>
-                  {{$data_tipe_bangunan->kabupaten->nama_kabupaten}}
-                </td>
-                <td>
-                  {{$data_tipe_bangunan->kecamatan->nama_kecamatan}}
-                </td>
+                    @if($data_tipe_bangunan->kabupaten_id != Null)
+                    {{$data_tipe_bangunan->kabupaten->nama_kabupaten}}
+                    @else
+                    -
+                    @endif
+                  </td>
+                  <td>
+                  @if($data_tipe_bangunan->kecamatan_id != Null)
+                    {{$data_tipe_bangunan->kecamatan->nama_kecamatan}}
+                    @else
+                    -
+                    @endif
+                  </td>
                 <td class="table-actions">
 
                         <a href="{{route('editTipeBangunan', $data_tipe_bangunan->id)}}" type="button" class="table-action">

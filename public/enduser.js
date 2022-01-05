@@ -91,6 +91,7 @@ $(document).ready(function(){
     $('#totalHarga').hide()
     $('#formTambahan').hide()
     $('#btnResetEstimasiWaktu').hide()
+    $('#download-rincian').hide()
     $(document).keypress(function(event){
         if (event.which == '13') {
               event.preventDefault();
@@ -147,6 +148,7 @@ $(document).ready(function(){
     $('#estimasi_waktu_id').change(function(){
         $('tfoot').hide()
         $('#btnResetEstimasiWaktu').hide()
+        $('#download-rincian').hide()
         if($(this).val() == '') reset()
         var estimasi_waktu_id = $(this).val();
         if(estimasi_waktu_id){
@@ -169,6 +171,7 @@ $(document).ready(function(){
                     });   
                     $('tfoot').show()
                     $('#btnResetEstimasiWaktu').show()
+                    $('#download-rincian').show()
                     $('select[name="estimasi_waktu_id"]').attr("disabled", true);
                     // $.each(detail_estimasi_waktu,function(i){
                     // var newDiv =
@@ -192,6 +195,7 @@ $(document).ready(function(){
        $(document).on('click', '#btnResetEstimasiWaktu', function(){
             $('tbody').children().empty();
             $('#btnResetEstimasiWaktu').hide()
+            $('#download-rincian').hide()
             $('select[name="estimasi_waktu_id"]').attr("disabled",false);
     })
 
@@ -215,3 +219,23 @@ $(document).ready(function(){
     
 });
 
+$(document).on('click', '#download-rincian', function(e){
+   
+    var provinsi_id = document.getElementById("provinsi").value;
+    var kabupaten_id = document.getElementById("kabupaten").value;
+    var kecamatan_id = document.getElementById("kecamatan").value;
+    var tipebangunan_id = document.getElementById("tipebangunan").value;
+   
+    $.ajax({
+        url: "/download-rincian",
+        type: "GET",
+        dataType: 'json',
+        data: {
+            provinsi_id: provinsi_id,
+            kabupaten_id: kabupaten_id,
+            kecamatan_id: kecamatan_id,
+            tipebangunan_id: tipebangunan_id    
+        },
+    });
+    
+});
