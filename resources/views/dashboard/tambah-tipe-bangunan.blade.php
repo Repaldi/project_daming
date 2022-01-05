@@ -59,14 +59,14 @@
                     <div class="col-lg-4">
                       <div class="form-group">
                         <select class="form-control" name="kabupaten_id" id="kabupaten">
-                          <option selected>---Pilih Kabupaten---</option>
+                          <option value="" selected>---Pilih Kabupaten---</option>
                         </select>  
                       </div>   
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <select class="form-control" name="kecamatan_id" id="kecamatan">
-                          <option selected>---Pilih Kecamatan---</option>
+                          <option value="" selected>---Pilih Kecamatan---</option>
                         </select> 
                       </div>    
                     </div>
